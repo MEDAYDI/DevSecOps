@@ -37,6 +37,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+    		<groupId>org.pitest</groupId>
+    		<artifactId>pitest-parent</artifactId>
+    		<version>1.1.10</version>
+    		<type>pom</type>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -45,6 +53,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+                   <groupId>org.jacoco</groupId>
+                   <artifactId>jacoco-maven-plugin</artifactId>
+                   <version>0.8.5</version>
+                   <executions>
+                      <execution>
+                         <goals>
+                            <goal>prepare-agent</goal>
+                         </goals>
+                      </execution>
+                      <execution>
+                         <id>report</id>
+                         <phase>test</phase>
+                         <goals>
+                            <goal>report</goal>
+                         </goals>
+                      </execution>
+                   </executions>
+                </plugin>
+
+				<plugin>
+    				<groupId>org.pitest</groupId>
+    				<artifactId>pitest-maven</artifactId>
+    				<version>1.1.10</version>
+    				<configuration>
+        			<targetClasses>
+            			<param>com.baeldung.testing.mutation.*</param>
+        				</targetClasses>
+        				<targetTests>
+            			<param>com.baeldung.mutation.test.*</param>
+					</targetTests>
+     				</configuration>
+				</plugin>
 			
 		</plugins>
 	</build>

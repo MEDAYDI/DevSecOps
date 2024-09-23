@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools { 
+        mvn 'mvn' 
+    }
 
   stages {
       stage('Build Artifact') {

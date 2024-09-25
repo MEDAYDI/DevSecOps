@@ -37,7 +37,7 @@ pipeline {
 
       stage('Docker Build and Push'){
         steps{
-          withDockerRegistry([credentialsId:"DockerHub",url: ""]){
+          withDockerRegistry(credentialsId: 'DockerHub1', url: 'https://hub.docker.com/u/mohamedaydi'){
             sh 'docker build -t mohamedaydi/DevSecOps:1.0'
             sh 'docker push mohamedaydi/DevSecOps:1.0'
           }

@@ -44,6 +44,17 @@ pipeline {
         }
       }
 
+    stage('SonarQube Analysis') {
+    withSonarQubeEnv() {
+      sh "mvn clean verify sonar:sonar -Dsonar.projectKey=DevSecOps -Dsonar.projectName=DevSecOps"
+    }
+    timeout(time: 2, unit: 'MINUTES'){
+      script{
+        waitForQualityGate: abortPipeline: true
+      }
+    }
+  }
+
 
   }
 

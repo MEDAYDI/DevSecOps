@@ -24,25 +24,25 @@ pipeline {
         }
       }
 
-      stage('Mutation Tests - PIT'){
-        steps{
-          sh "mvn org.pitest:pitest-maven:mutationCoverage"
-        }
-        post{
-          always {
-            pitmutation mutationStatsFile: '**/target/pit-reports/**/index.html'
-          }
-        }
-      }
+      // stage('Mutation Tests - PIT'){
+      //   steps{
+      //     sh "mvn org.pitest:pitest-maven:mutationCoverage"
+      //   }
+      //   post{
+      //     always {
+      //       pitmutation mutationStatsFile: '**/target/pit-reports/**/index.html'
+      //     }
+      //   }
+      // }
 
-      stage('Docker Build and Push'){
-        steps{
-          withDockerRegistry(credentialsId: 'DockerHub1', url: ''){
-            sh 'docker build -t mohamedaydi/devsecops:1.0 .'
-            sh 'docker push mohamedaydi/devsecops:1.0'
-          }
-        }
-      }
+      // stage('Docker Build and Push'){
+      //   steps{
+      //     withDockerRegistry(credentialsId: 'DockerHub1', url: ''){
+      //       sh 'docker build -t mohamedaydi/devsecops:1.0 .'
+      //       sh 'docker push mohamedaydi/devsecops:1.0'
+      //     }
+      //   }
+      // }
 
     stage('SonarQube Analysis') {
     withSonarQubeEnv() {

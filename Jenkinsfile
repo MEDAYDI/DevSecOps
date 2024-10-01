@@ -20,7 +20,7 @@ pipeline {
 
       stage('Mutation Tests - PIT'){
         steps{
-          sh "mvn org.pitest:pitest-maven:mutationCoverage"
+          sh "mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage"
         }
       }
 

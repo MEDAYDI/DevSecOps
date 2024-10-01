@@ -5,8 +5,8 @@ echo $dockerImageName
 
 TRIVY_VERSION="latest"
 
-docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:$TRIVY_VERSION -q image --exit-code 0 --severity HIGH --light $dockerImageName
-docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:$TRIVY_VERSION -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
+docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:$TRIVY_VERSION --cache-dir /root/.cache -q image --exit-code 0 --severity HIGH --light $dockerImageName
+docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:$TRIVY_VERSION --cache-dir /root/.cache -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
 
     # Trivy scan result processing
     exit_code=$?

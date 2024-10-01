@@ -70,7 +70,7 @@ pipeline {
         always { 
           junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
-          pitmutation mutationStatsFile: '**/target/pit-reports/**/index.html'
+          // pitmutation mutationStatsFile: '**/target/pit-reports/**/index.html'
           dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
         }
   }

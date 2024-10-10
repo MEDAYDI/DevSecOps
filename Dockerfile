@@ -2,7 +2,7 @@
 # initialize build and set base image for first stage
 FROM maven:3.6.3-adoptopenjdk-11 as stage1
 # speed up Maven JVM a bit
-ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+#ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 # set working directory
 WORKDIR /opt/demo
 # copy just pom.xml
@@ -16,6 +16,8 @@ RUN mvn clean install -Dmaven.test.skip=true
 #Stage 2
 # set base image for second stage
 FROM adoptopenjdk/openjdk11:jre-11.0.9_11-alpine
+# Install necessary packages
+RUN apk --no-cache add shadow
 # Create a custom user with UID 1234 and GID 1234
 RUN groupadd -r user && \
     useradd -r -g user user

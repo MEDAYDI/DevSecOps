@@ -24,16 +24,7 @@ pipeline {
         }
       }
 
-       stage('Docker Build and Push'){
-         steps{
-           withDockerRegistry(credentialsId: 'DockerHub1', url: ''){
-             sh 'docker build -t mohamedaydi/devsecops:1.0 .'
-             sh 'docker push mohamedaydi/devsecops:1.0'
-           }
-         }
-       }
-
-    stage('SonarQube Analysis') {
+      stage('SonarQube Analysis') {
       steps{
         withSonarQubeEnv('sonar') {
          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=DevSecOps -Dsonar.projectName=DevSecOps"
@@ -46,6 +37,15 @@ pipeline {
 
       }
     }
+
+       stage('Docker Build and Push'){
+         steps{
+           withDockerRegistry(credentialsId: 'DockerHub1', url: ''){
+             sh 'docker build -t mohamedaydi/devsecops:1.0 .'
+             sh 'docker push mohamedaydi/devsecops:1.0'
+           }
+         }
+       }
 
     stage('vulnerability Scan - Docker'){
       steps{
